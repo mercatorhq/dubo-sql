@@ -1,0 +1,29 @@
+# Command runner for Mercator backend
+# This is a [justfile](https://github.com/casey/juste)
+
+# set the default shell (to be safe)
+set shell := ["zsh", "-uc"]
+set dotenv-load
+
+venv := 'env'
+source_venv := 'source ' + venv + '/bin/activate'
+
+default:
+	@just --list
+
+build:
+    docker build -t bird_submission_image .
+    docker save -o dubo_openaifinetune_v1.tar bird_submission_image
+    gzip dubo_openaifinetune_v1.tar
+
+dev:
+    docker run -it -v $(pwd)/dev:/app/dev bird_submission_image python dubo_bird.py --dryrun True
+
+dist:
+    mkdir -p dist
+    mkdir dubo_openaifinetune_v1
+    cp dubo_bird.py README.md requirements.txt predict_dev.json dubo_openaifinetune_v1
+    tar -czvf dubo_openaifinetune_v1.tar.gz dubo_openaifinetune_v1
+    mv dubo_openaifinetune_v1.tar.gz dist/
+    rm -rf dubo_openaifinetune_v1
+    echo DONE

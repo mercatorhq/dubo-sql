@@ -1,0 +1,51 @@
+# Version control directories
+.git/
+.svn/
+.hg/
+dev/
+
+# Build artifacts
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment and Python cache
+*.venv
+.venv/
+venv/
+.venv/
+*.cache/
+
+# IDE directories
+.idea/
+*.swp
+*.swo
+*.swn
+*.log
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Node modules for web applications
+node_modules/
+
+# Other
+*.bak
+*.tmp
+*.swp
+*.json
+*.tar
+*.gz
+*.md
+justfile
